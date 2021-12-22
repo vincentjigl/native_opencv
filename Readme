@@ -1,0 +1,2 @@
+1. cp opencv/sdk to opencvsdkxxx
+2. Android.mk set opencv root path
