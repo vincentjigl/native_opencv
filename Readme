@@ -1,2 +1,6 @@
 1. cp opencv/sdk to opencvsdkxxx
 2. Android.mk set opencv root path
+
+cmake works
+waitkey imshow compile error still exist
+

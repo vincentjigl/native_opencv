@@ -1,0 +1,28 @@
+#export ANDROID_NDK=/home/vincent/env/ndk/android-ndk-r21e
+
+rm -r build
+mkdir build && cd build 
+
+cmake \
+	-DCMAKE_CXX_FLAGS=-frtti -fexceptions \
+	-DCMAKE_FIND_ROOT_PATH=. \
+	-DCMAKE_BUILD_TYPE=Debug \
+	-DCMAKE_TOOLCHAIN_FILE=/home/vincent/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake \
+	-DANDROID_ABI=armeabi-v7a \
+	-DANDROID_NDK=/home/vincent/Android/Sdk/ndk/21.1.6352462 \
+	-DANDROID_PLATFORM=android-28 \
+	-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a \
+	-DCMAKE_ANDROID_NDK=/home/vincent/Android/Sdk/ndk/21.1.6352462 \
+	-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+	-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=./debug/obj/armeabi-v7a \
+	-DCMAKE_MAKE_PROGRAM=/home/vincent/Android/Sdk/cmake/3.10.2.4988404/bin/ninja \
+	-DCMAKE_SYSTEM_NAME=Android \
+	-DCMAKE_SYSTEM_VERSION=28 \
+	-DOpenCV_DIR=/home/vincent/env/opencv/OpenCV-android-sdk-4.5.2/sdk/native \
+	-GNinja \
+	..
+	#-B/home/vincent/workspace/zyb/native-opencv-android-template/app/.cxx/cmake/debug/armeabi-v7a \
+
+make -j20
+
+

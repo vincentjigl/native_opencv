@@ -16,11 +16,13 @@
 #include <typeinfo>
 
 // #include <cv.h>
-#include <opencv/cv.h>
+//#include <opencv/cv.h>
 // #include <highgui.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
-#include "opencv2/imgproc/imgproc_c.h"
+#include <opencv2/highgui/highgui_c.h>
+//#include "opencv2/imgproc/imgproc_c.h"
+#include "opencv2/imgproc.hpp"
 #include "opencv2/opencv.hpp"
 
 #ifdef __unix__

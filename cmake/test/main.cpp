@@ -1,7 +1,11 @@
- #include "../lib/VideoStitch.h"
+#include "../lib/VideoStitch.h"
+#include <stdlib.h>
+#include <opencv2/opencv.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
 
 IVideoStitch *ivs, *givs;
-
+using namespace cv;
 // 缓存的图像序列
 std::vector<cv::Mat> vMatsrc;
 
@@ -17,7 +21,30 @@ static int imgproc(int height, int width, char* buff, void *arg)
 
 static void* captureThread(void *arg)
 {
-	ivs->v4l2_capture_start(imgproc);
+	//ivs->v4l2_capture_start(imgproc);
+	        {
+	        int i=0;
+	        char filename[88];
+	        cv::Mat imageYUV;
+
+	        for(; i < 888; i++)
+	        {
+	    		sprintf(filename, "/data/saved_imgs6/img%05d.jpg", i);
+	            printf("%s\n", filename);
+		        cv::Mat frame = imread(filename, IMREAD_COLOR);
+	            if(!frame.data)
+	            {
+	                printf("[mbh] video end! line=34\n");
+	                break;
+	            }
+
+	    		cv::cvtColor(frame, imageYUV, CV_BGR2YUV_YV12);
+	            imgproc(frame.rows, frame.cols, (char*)imageYUV.data, arg);
+	        }
+
+	        printf("[mbh]v4l2cap_imgs thread end. total frame num = %d\n", i);
+        	return 0;
+        }
 }
 
 // 读取图片测试
@@ -38,22 +65,20 @@ int main(int argc, char **argv)
         return 0;
     }
 
-#if 1 //def HAVE_TBB
-	outLinePosStr(1, "HAVE_TBB");
-#else
-	outLinePosStr(0, "NO_TBB");
-#endif
 
-    cv::setNumThreads(4);
+	outLinePosStr(1, "HAVE_TBB");
+
+
+    //cv::setNumThreads(4);
 
 	// 1. 打开摄像头
     pthread_t thrd;
     int ret1 = pthread_create(&thrd, NULL, captureThread, NULL);
 
-	// printf("\n[mbh]reading images...\n");
+	printf("\n[mbh]reading images...\n");
 	pthread_join(thrd, NULL);
 
-	ivs->v4l2_capture_stop();
+	//ivs->v4l2_capture_stop();
 
 	int nFrame = vMatsrc.size();
 	// ivs->clear();
@@ -94,7 +119,7 @@ int main(int argc, char **argv)
 		printf("[mbh]Stitched image is Empty !\n");
 	else{
 		printf("[mbh]Stitched image: w h = %d %d\n", matdst.cols, matdst.rows);
-		#ifdef  __x86_64__
+		#if 0 //def  __x86_64__
 			imshow("x86_mat", matdst);
 			printf("[mbh]Press any key to quit. %s\n", argv[3]);
 			waitKey(0);
@@ -102,9 +127,10 @@ int main(int argc, char **argv)
 			char filename[64];
 			time_t t = time(NULL); //获取目前秒时间
             tm* local = localtime(&t); //转为本地时间
-            strftime(filename, 64, "/tmp/saved_imgs/st%m%d%H%M%S.jpg", local);
-			imwrite(filename, matdst);
-// 			imwrite("stitched.jpg", matdst);
+            strftime(filename, 64, "/tmp/saved_imgs/st%m%d%H%M%S.yuv", local);
+            vector<int> params;// = std::vector<int>();
+            //imwrite(filename, matdst, params);
+ 			imwrite("stitched.jpg", matdst);
 		#endif
 	}
 
@@ -183,8 +209,8 @@ static void* callGetImage(void *arg)
                 int h = matdst.rows*(double)winW/matdst.cols;
                 cv::resize(matdst, matdst, cvSize(winW, h));
             }
-			imshow("x86_mat", matdst);
-			waitKey(80);
+			//imshow("x86_mat", matdst);
+			//waitKey(80);
 		}
 		
 		Sleep(6);
@@ -233,6 +259,7 @@ int test_random_stitch()
 			vMatLine.push_back(matImg.clone());					\
 			ivs->lineMerge_set(vMatLine, i)
 
+#if 0
 int main3(int argc, char **argv)
 {
 	int 	i=0;
@@ -295,3 +322,4 @@ int main3(int argc, char **argv)
 	delete ivs;
 	return 0;
 }
+#endif

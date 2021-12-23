@@ -311,12 +311,12 @@ static void runVideo2(imgProcCall ipc, string infile, float fScale=1, bool bGray
                         else if(nkey == 'b' || nkey == 'B')
                         {
                                 i = i > 100 ? i-100 : 0;
-                                videoCap.set(CV_CAP_PROP_POS_FRAMES, i);
+                                videoCap.set(CAP_PROP_POS_FRAMES, i);
                         }
                         else if(nkey == 'f' || nkey == 'F')
                         {
                                 i += 100;
-                                videoCap.set(CV_CAP_PROP_POS_FRAMES, i);
+                                videoCap.set(CAP_PROP_POS_FRAMES, i);
                         }
                         else if(nkey == 27 || nkey == 'q' || nkey == 'Q')       // 按Esc键关闭退出
                         {
@@ -399,12 +399,12 @@ static void runVideo2(imgProcCall ipc, string infile, float fScale=1, bool bGray
                         else if(nkey == 'b' || nkey == 'B')
                         {
                                 i = i > 100 ? i-100 : 0;
-                                videoCap.set(CV_CAP_PROP_POS_FRAMES, i);
+                                videoCap.set(CAP_PROP_POS_FRAMES, i);
                         }
                         else if(nkey == 'f' || nkey == 'F')
                         {
                                 i += 100;
-                                videoCap.set(CV_CAP_PROP_POS_FRAMES, i);
+                                videoCap.set(CAP_PROP_POS_FRAMES, i);
                         }
                         else if(nkey == 27 || nkey == 'q' || nkey == 'Q')		// 按Esc键关闭退出
                         {

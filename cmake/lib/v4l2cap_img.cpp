@@ -8,10 +8,11 @@ extern "C" {
 
 	int v4l2cap_main(const char* videoName, int maxFrame, imgProcCall ipc, void *arg)
 	{
-		VideoCapture videoCap;
+		//VideoCapture videoCap;
     	int nLen = strlen(videoName);
 
     	// 1. 读取摄像头 或视频
+        /*
         if(MyTools::isnum(videoName)){
         	// videoCap.open(atoi(videoName));
         	printf("[mbh] open camera failed. %s\n", __FILE__);
@@ -22,7 +23,7 @@ extern "C" {
 			videoCap.open(videoName);
         
         // 2. 读取文件夹图片
-        else
+        else*/
         {
         	int i=0;
 	        char filename[88];
@@ -32,11 +33,11 @@ extern "C" {
 	        for(; i < maxFrame && bPlay; i++)
 	        {
 	    		sprintf(filename, "%s/img%05d.jpg", videoName, i);
-	            // printf("%s\n", filename);
-		        cv::Mat frame = imread(filename, CV_LOAD_IMAGE_COLOR);
+	            printf("%s\n", filename);
+		        cv::Mat frame = imread(filename, IMREAD_COLOR);
 	            if(!frame.data)
 	            {
-	                // printf("[mbh] video end! line=34\n");
+	                printf("[mbh] video end! line=34\n");
 	                break;
 	            }
 
@@ -47,7 +48,7 @@ extern "C" {
 	        printf("[mbh]v4l2cap_imgs thread end. total frame num = %d\n", i);
         	return 0;
         }
-
+#if 0
         // 3. 读取视频
         if(videoCap.isOpened())
             printf("[mbh]打开视频成功！videoName = %s\n", videoName);
@@ -83,7 +84,7 @@ extern "C" {
         videoCap.release();
 
 		outLinePos(0);	// 不可去掉，报错
-
+#endif
 		return 0;
 	}
 

@@ -25,8 +25,8 @@ public:
             return false;
         }
 
-        videoCap.set(CV_CAP_PROP_FRAME_WIDTH, 1280);  	// 1280*1024 1600*1200
-        videoCap.set(CV_CAP_PROP_FRAME_HEIGHT, 960);	// 640*480 1280*960
+        videoCap.set(CAP_PROP_FRAME_WIDTH, 1280);  	// 1280*1024 1600*1200
+        videoCap.set(CAP_PROP_FRAME_HEIGHT, 960);	// 640*480 1280*960
 
         Mat frame;
         for (int i = 0; i < 3; i++) {
@@ -192,8 +192,8 @@ public:
     {
         //视频保存位置
         VideoCapture videoCap(0);
-        videoCap.set(CV_CAP_PROP_FRAME_WIDTH, 1280);  	// 1280*1024 1600*1200
-        videoCap.set(CV_CAP_PROP_FRAME_HEIGHT, 960);	// 640*480 1280*960
+        videoCap.set(CAP_PROP_FRAME_WIDTH, 1280);  	// 1280*1024 1600*1200
+        videoCap.set(CAP_PROP_FRAME_HEIGHT, 960);	// 640*480 1280*960
 
         if(!videoCap.isOpened())
         {
@@ -208,12 +208,14 @@ public:
         if(bSave)
         {
             //获取当前摄像头的视频信息
-            cv::Size S = cv::Size((int)videoCap.get(CV_CAP_PROP_FRAME_WIDTH),
-                                  (int)videoCap.get(CV_CAP_PROP_FRAME_HEIGHT));
+            cv::Size S = cv::Size((int)videoCap.get(CAP_PROP_FRAME_WIDTH),
+                                  (int)videoCap.get(CAP_PROP_FRAME_HEIGHT));
             //打开视频路径，设置基本信?open函数中你参数跟上面给出的VideoWriter函数是一样的
             //outputVideo.open(outputVideoPath, -1, 30.0, S, true);// ?FFMPEG: tag  is not found (format 'avi / AVI，但可以保存
             string outputVideoPath = "test.avi";
-            outputVideo.open(outputVideoPath, CV_FOURCC('M', 'J', 'P', 'G'), 10.0, S, true);
+			//jgl comment it, need to fix, fourcc undefined
+            //outputVideo.open(outputVideoPath, CV_FOURCC('M', 'J', 'P', 'G'), 10.0, S, true);
+            
             //CV_FOURCC('P','I','M','1');
             //cv::VideoWriter_fourcc(*'XVID');
             if (!outputVideo.isOpened()) {

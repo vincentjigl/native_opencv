@@ -89,7 +89,7 @@ public:
         // 		else
         if(imgFile)
         {
-            matImg = imread(imgFile, CV_LOAD_IMAGE_COLOR);
+            matImg = imread(imgFile, IMREAD_COLOR);
             if(!matImg.empty()) return;
         }
         printf("open image file failed! %s \n", imgFile);
@@ -1134,7 +1134,7 @@ END:
             strftime(buff, 32, "%m%d%H%M%S", local);
             sprintf(filename, "%s/img%05d.jpg", save_path, i);
             // printf("%s\n", filename);
-            imwrite(filename, matsrc);
+            //imwrite(filename, matsrc);
         }
 
         printf("[mbh] %d images saved.\n", i);

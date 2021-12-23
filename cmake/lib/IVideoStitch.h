@@ -1,6 +1,6 @@
 #ifndef IVIDEOSTITCH_H
 #define IVIDEOSTITCH_H
-#include <opencv2/cvconfig.h>
+#include "opencv2/cvconfig.h"
 #include "../vcpp15/MyHeadDef.h"
 
 /**

@@ -55,6 +55,7 @@ public:
         cv::blur(matbin, mattmp, cvSize(3,3));
         MyMatGray::grad(mattmp, matbin);
 
+		LOGE("%s:%d video stitch  grad\n", __func__, __LINE__);
         cv::Point mLoc;
         cv::Mat   result;
         double 	  maxVal=-1;
@@ -81,6 +82,7 @@ public:
         	dx = tx;
         	sumdx += dx;
         }
+		LOGE("%s:%d \n", __func__, __LINE__);
 
    		// 禁止纵向大的移动 (> 8px)
    		if(abs(ty) > 16)
@@ -103,6 +105,7 @@ public:
     	fprintf(logFile, "%3d %3d %3d %.3f %d %d %d\n", nFrame, dx, dy, maxVal, tw, sumdx, nSkip);
 		fclose(logFile);
 #endif
+		LOGE("%s:%d \n", __func__, __LINE__);
 
         // 防止极慢速误差累积
         if(nFrame++ > 2)
@@ -114,6 +117,7 @@ public:
 			else
 				nSkip = 0;
 		}
+		LOGE("%s:%d \n", __func__, __LINE__);
 
 		matbin.copyTo(matpre);
 
