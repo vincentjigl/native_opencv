@@ -10,7 +10,7 @@ set_target_properties(lib_opencv PROPERTIES IMPORTED_LOCATION ${OpenCV_DIR}/libs
 # Gradle automatically packages shared libraries with your APK.
 
 #add_library(native-lib SHARED native-lib.cpp)
-add_executable(test ./test/main.cpp ./lib/v4l2cap_img.cpp)
+add_executable(teststitch ./test/main.cpp ./lib/v4l2cap_img.cpp)
 
 
 find_library( # Sets the name of the path variable.
@@ -25,4 +25,4 @@ find_library( # Sets the name of the path variable.
 # build script, prebuilt third-party libraries, or system libraries.
 
 #target_link_libraries(native-lib lib_opencv ${log-lib})
-target_link_libraries(test lib_opencv ${log-lib})
+target_link_libraries(teststitch lib_opencv ${log-lib})
