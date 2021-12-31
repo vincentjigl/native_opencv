@@ -1,0 +1,3 @@
+/home/vincent/workspace/ocr/stitch/yfoutput/build/CMakeFiles/edit_cache.dir
+/home/vincent/workspace/ocr/stitch/yfoutput/build/CMakeFiles/rebuild_cache.dir
+/home/vincent/workspace/ocr/stitch/yfoutput/build/CMakeFiles/ocr_test.dir

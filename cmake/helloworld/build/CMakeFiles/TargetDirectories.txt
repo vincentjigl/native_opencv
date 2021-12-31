@@ -1,3 +1,0 @@
-/home/vincent/workspace/stitch/helloworld/build/CMakeFiles/rebuild_cache.dir
-/home/vincent/workspace/stitch/helloworld/build/CMakeFiles/hello.dir
-/home/vincent/workspace/stitch/helloworld/build/CMakeFiles/edit_cache.dir
