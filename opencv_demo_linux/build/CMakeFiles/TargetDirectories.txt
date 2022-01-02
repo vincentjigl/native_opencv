@@ -1,0 +1,3 @@
+/home/vincent/workspace/zyb/native_opencv/opencv_demo_linux/build/CMakeFiles/rebuild_cache.dir
+/home/vincent/workspace/zyb/native_opencv/opencv_demo_linux/build/CMakeFiles/edit_cache.dir
+/home/vincent/workspace/zyb/native_opencv/opencv_demo_linux/build/CMakeFiles/test.dir
