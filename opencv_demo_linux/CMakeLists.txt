@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.4.1)
+project(opencv_demo)
 
 SET (OPENCV_INCLUDE_PATH /usr/local/include /usr/local/include/opencv4 /usr/local/include/opencv2)
 SET (OpenCV_LIBS opencv_core opencv_highgui opencv_imgproc opencv_flann opencv_features2d opencv_imgcodecs opencv_photo opencv_stitching opencv_video opencv_videoio)

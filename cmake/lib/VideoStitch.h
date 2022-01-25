@@ -155,7 +155,7 @@ public:
 			outLinePosStr(matsrc.cols, "stitch image empty!");
 			return -1;
 		}
-		LOGE("%s:%d \n", __func__, __LINE__);
+		printf("%s:%d \n", __func__, __LINE__);
 
 //		cv::Mat matroi(128, 96, CV_8UC1), matroi0;
 //		MyResize_warpAffine(matsrc(cvRect(roiX, roiY, roiW, roiH)), matroi);
@@ -163,9 +163,9 @@ public:
 	    std::lock_guard<std::mutex> muty(ysm_mutex);
 		ysm.rightHand = mode;	// mode=0,左手模式 mode=1,右手模式
 		
-		LOGE("%s:%d mode = %d\n", __func__, __LINE__, mode);
+		printf("%s:%d mode = %d\n", __func__, __LINE__, mode);
     	int mVal = ysm.videoStitch(matsrc);
-		LOGE("%s:%d \n", __func__, __LINE__);
+		printf("%s:%d \n", __func__, __LINE__);
 
 #ifdef MDEBUG
 		cv::Mat matst;

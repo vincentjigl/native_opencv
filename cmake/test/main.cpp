@@ -19,6 +19,63 @@ static int imgproc(int height, int width, char* buff, void *arg)
 	return 0; 
 }
 
+static void* captureThread2(void *arg)
+{
+	//ivs->v4l2_capture_start(imgproc);
+	   {
+	        for(int i=0; i < 120; i++)
+	        {
+                int w=640, h=480;
+                unsigned char* inputY =(unsigned char*)malloc(w*h);
+                FILE* fp=fopen("/data/stitch-in.yuv", "r");
+                fread(inputY, w*h, 1, fp);
+                //fseek(fp, w*h/2, SEEK_CUR);
+	            printf("stitch-in frame %d\n", i);
+
+		        cv::Mat frame(w, h, CV_8UC1, inputY);
+	            if(!frame.data)
+	            {
+	                printf("[mbh] video end! line=34\n");
+	                break;
+	            }
+
+	            vMatsrc.push_back(frame.clone());
+	        }
+
+        	return 0;
+        }
+}
+
+static void* captureThread3(void *arg)
+{
+	//ivs->v4l2_capture_start(imgproc);
+	        {
+	        int i=0;
+	        char filename[88];
+	        cv::Mat imageYUV;
+
+	        for(; i < 120; i++)
+	        {
+	    		sprintf(filename, "/data/saved_jpg/st%d.jpg", i);
+	            printf("%s\n", filename);
+		        cv::Mat frame = imread(filename, IMREAD_GRAYSCALE);
+	            if(!frame.data)
+	            {
+	                printf("[mbh] video end! line=34\n");
+	                break;
+	            }
+
+                //cv::cvtColor(frame, imageYUV, CV_BGR2YUV_YV12);
+                //imgproc(frame.rows, frame.cols, (char*)imageYUV.data, arg);
+                cv::Mat matsrc(frame.rows, frame.cols, CV_8UC1, frame.data);
+                vMatsrc.push_back(matsrc.clone());
+            }
+
+	        printf("[mbh]v4l2cap_imgs thread end. total frame num = %d\n", i);
+        	return 0;
+        }
+}
+
 static void* captureThread(void *arg)
 {
 	//ivs->v4l2_capture_start(imgproc);

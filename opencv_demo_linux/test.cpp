@@ -1,4 +1,5 @@
 #include <opencv2/opencv.hpp>
+#include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
@@ -18,14 +19,16 @@ public:
 };
 
 void QuickDemo::pixel_statistic_demo(Mat &image){
-	int maxv, minv;
+	double maxv, minv;
 	Point minLoc, maxLoc;
 	vector<Mat> mv;
 	split(image, mv);
 
 	for(int i=0; i< mv.size(); i++){
 		minMaxLoc(mv[i], &minv, &maxv, &minLoc, &maxLoc, Mat());
-		cout<<"No.channel:" <<i << " min value:"<<minv<<" max value:" << maxv<<endl;
+		std::cout <<"No. channels:"<< i << " min value:" << minv << " max value:" << maxv << std::endl;
+		//minMaxLoc(mv[i], &minv, &maxv, &minLoc, &maxLoc, Mat());
+		//cout<<"No.channel:" <<i << " min value:"<<minv<<" max value:" << maxv<<endl;
 	}
 
 	Mat mean, stddev;
